@@ -10,16 +10,18 @@ import UIKit
 
 class ShowsListViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.delegate = self
+        }
+    }
     let CELL_HEIGHT = 160
-    
     var shows = [Show]()
     
     // MARK: - View Lifecyle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
         fetchTvShows()
     }
     
@@ -53,6 +55,5 @@ extension ShowsListViewController: UITableViewDataSource {
         cell.show = shows[indexPath.row]
         return cell
     }
-    
 
 }

@@ -13,23 +13,20 @@ class ShowTableViewCell: UITableViewCell {
 
     @IBOutlet weak var showImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    let imagePlaceholder = "img-placeholder-user2.png"
     
     var show: Show? {
         didSet {
-            if let imageURL = show?.imageUrl {
-                showImageView.sd_setImage(with: URL(string: "\(Constants.BASE_URL)\(imageURL)"), placeholderImage: UIImage(named: "img-placeholder-user2.png"))
-            } else {
-                showImageView.image = UIImage(named: "img-placeholder-user2.png")
-            }
+            let imageURL = show?.imageUrl ?? imagePlaceholder
+            showImageView.sd_setImage(with: URL(string: "\(Constants.BASE_URL)\(imageURL)"), placeholderImage: UIImage(named: imagePlaceholder))
             titleLabel.text = show?.title ?? "TV SHOW"
         }
     }
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

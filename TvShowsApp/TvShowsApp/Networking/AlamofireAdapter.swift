@@ -34,7 +34,7 @@ class AlamofireAdapter {
                 case .success(let data):
                     let model = self.parseData(type: dataType, data: data)
                     completion(Result.success(model!))
-                case .failure(let error): ()
+                case .failure( _): ()
                     
                 }
         }
@@ -56,7 +56,7 @@ class AlamofireAdapter {
     }
     
     func fetchShows(completion: @escaping (Result<ShowModel, AFError>) -> Void) {
-        let request = AlamofireRequest.init(url: Constants.SHOWS_URL, method: .get)
+        let request = AlamofireRequest(url: Constants.SHOWS_URL, method: .get)
         fetch(with: request, dataType: ShowModel.self, completion: completion)
     }
     

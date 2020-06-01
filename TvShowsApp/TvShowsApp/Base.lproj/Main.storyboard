@@ -222,7 +222,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wDT-Tu-MSf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="sep-Hm-XUh" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LoginNavigationVC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="sep-Hm-XUh" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3dA-S2-UK9">
                         <autoresizingMask key="autoresizingMask"/>

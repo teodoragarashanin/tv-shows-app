@@ -28,17 +28,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         emailTextField.delegate = self
         passwordTextField.delegate = self
-       // registerNotifications()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        scrollView.contentInset.bottom = 0
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK - Login Setup
@@ -48,21 +37,21 @@ class LoginViewController: UIViewController {
             switch result {
             case .success(let token):
                 print(token)
-                self?.showVC()
+                self?.presetnTvShowsVC()
             case .failure( _):
                 self?.showAlert(title: "Login failed.", message: "Please try again with another credentials")
             }
         }
     }
     
-    func showVC() {
+    func presetnTvShowsVC() {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "ShowsVC")
         navigationController?.show(vc, sender: self)
     }
     
-    // MARK: - Actions
     
+    // MARK: - Actions
     
     @IBAction func emailTextFieldChanged(_ sender: UITextField) {
         guard let text = sender.text else { return }
@@ -78,7 +67,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func rememberMeAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        UserDefaults.standard.set(sender.isSelected, forKey: Constants.REMEMBERED)        
+        UserDefaults.standard.set(sender.isSelected, forKey: Constants.REMEMBERED)
     }
     
     @IBAction func loginAction(_ sender: UIButton) {
