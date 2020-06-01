@@ -28,6 +28,13 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK - Login Setup
@@ -78,6 +85,25 @@ class LoginViewController: UIViewController {
         } else {
              loginUser(email: email, password: password)
         }
+    }
+    
+    // MARK: - Keyboard setup
+    
+    @objc func keyboardWillShow(notification:NSNotification){
+
+        let userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height + 20
+        scrollView.contentInset = contentInset
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification){
+
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
     }
     
 }

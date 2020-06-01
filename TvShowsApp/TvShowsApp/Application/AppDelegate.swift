@@ -13,8 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var isUserRemembered = false
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        checkIfUserExists()
+        return true
+    }
+    
+    func checkIfUserExists() {
         isUserRemembered = UserDefaults.standard.bool(forKey: Constants.REMEMBERED)
         if isUserRemembered {
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "ShowsVC")
@@ -25,9 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = vc
             window?.makeKeyAndVisible()
         }
-
-        return true
     }
     
 }
-

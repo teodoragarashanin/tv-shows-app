@@ -35,15 +35,14 @@ class AlamofireAdapter {
                     let model = self.parseData(type: dataType, data: data)
                     completion(Result.success(model!))
                 case .failure( _): ()
-                    
                 }
         }
     }
     
     func parseData<T: Decodable>(type: T.Type, data: Data) -> T? {
         do {
-            let genericModel = try JSONDecoder().decode(type, from: data)
-            return genericModel
+            let model = try JSONDecoder().decode(type, from: data)
+            return model
         } catch {
             return nil
         }
