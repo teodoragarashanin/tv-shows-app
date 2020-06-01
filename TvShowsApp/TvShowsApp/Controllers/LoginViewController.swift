@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // MARK: - Variables
     
@@ -27,6 +28,17 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         emailTextField.delegate = self
         passwordTextField.delegate = self
+       // registerNotifications()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        scrollView.contentInset.bottom = 0
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK - Login Setup
@@ -75,7 +87,7 @@ class LoginViewController: UIViewController {
         }
      
     }
-
+    
 }
 
 extension LoginViewController: UITextFieldDelegate {
