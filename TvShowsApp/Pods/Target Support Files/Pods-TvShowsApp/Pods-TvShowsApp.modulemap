@@ -1,0 +1,6 @@
+framework module Pods_TvShowsApp {
+  umbrella header "Pods-TvShowsApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

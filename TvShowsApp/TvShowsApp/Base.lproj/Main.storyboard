@@ -33,7 +33,10 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SD8-ed-Gzc">
                                         <rect key="frame" x="0.0" y="41.5" width="374" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <action selector="emailTextFieldChanged:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="8Vt-mJ-mw7"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZ1-Ah-tzX">
                                         <rect key="frame" x="0.0" y="96.5" width="74" height="20.5"/>
@@ -44,7 +47,10 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ne7-15-5b1">
                                         <rect key="frame" x="0.0" y="138" width="374" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <connections>
+                                            <action selector="passwordTextFieldChanged:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="mbx-dQ-lek"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -62,6 +68,9 @@
                                 </constraints>
                                 <state key="normal" image="ic-checkbox-empty"/>
                                 <state key="selected" image="ic-checkbox-filled"/>
+                                <connections>
+                                    <action selector="rememberMeAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hZk-MS-H32"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zM-2T-O2q">
                                 <rect key="frame" x="55" y="735.5" width="112" height="20.5"/>
@@ -108,7 +117,7 @@
                     <navigationItem key="navigationItem" id="385-ZZ-ScD"/>
                     <connections>
                         <outlet property="emailTextField" destination="SD8-ed-Gzc" id="ph5-oL-dU1"/>
-                        <outlet property="paswordTextField" destination="ne7-15-5b1" id="btf-8f-QvN"/>
+                        <outlet property="passwordTextField" destination="ne7-15-5b1" id="xYu-T3-7kj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
