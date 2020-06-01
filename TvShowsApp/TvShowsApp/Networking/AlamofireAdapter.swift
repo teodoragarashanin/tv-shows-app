@@ -37,5 +37,10 @@ class AlamofireAdapter {
         fetch(with: request, completion: completion)
     }
     
+    func fetchShows(completion: @escaping (Result<Data, AFError>) -> Void) {
+        let request = ApiRequest.init(url: Constants.SHOWS_URL, method: .get)
+        fetch(with: request, completion: completion)
+    }
+    
 }
 

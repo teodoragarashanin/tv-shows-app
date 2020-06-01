@@ -10,8 +10,11 @@ import Foundation
 
 struct Constants {
     static let LOGIN_URL = "https://api.infinum.academy/api/users/sessions"
+    static let SHOWS_URL = "https://api.infinum.academy/api/shows"
+    static let BASE_URL = "https://api.infinum.academy"
+
 }
 
 
-//        email = "ios.team@infinum.hr"
-//        password = "infinum1"
+//email = "ios.team@infinum.hr"
+//password = "infinum1"

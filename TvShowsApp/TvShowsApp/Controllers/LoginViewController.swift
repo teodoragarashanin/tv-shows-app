@@ -76,15 +76,18 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginAction(_ sender: UIButton) {
-        if email.isEmailValid() {
-            if password.isEmpty {
-                    showAlert(title: "Error", message: "Please enter password.")
-            } else {
-                 loginUser(email: email, password: password)
-            }
-        } else {
-            showAlert(title: "Error", message: "Invalid email address. Please try with another one.")
-        }
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "ShowsVC")
+        navigationController?.show(vc, sender: self)
+//        if email.isEmailValid() {
+//            if password.isEmpty {
+//                    showAlert(title: "Error", message: "Please enter password.")
+//            } else {
+//                 loginUser(email: email, password: password)
+//            }
+//        } else {
+//            showAlert(title: "Error", message: "Invalid email address. Please try with another one.")
+//        }
      
     }
     
