@@ -22,8 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func checkIfUserExists() {
         isUserRemembered = UserDefaults.standard.bool(forKey: Constants.REMEMBERED)
         if isUserRemembered {
+            let navigationController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginNavigationVC")
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "ShowsVC")
-            window?.rootViewController = vc
+            navigationController.show(vc, sender: navigationController)
+            window?.rootViewController = navigationController
             window?.makeKeyAndVisible()
         } else {
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginNavigationVC")

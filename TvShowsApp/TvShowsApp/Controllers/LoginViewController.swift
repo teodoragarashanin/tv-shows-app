@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var rememberButton: UIButton!
     
     // MARK: - Variables
     
@@ -28,13 +29,13 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+        subscribeToKeyboardEvents()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
+        resetLogin()
     }
     
     // MARK - Login Setup
@@ -57,6 +58,13 @@ class LoginViewController: UIViewController {
         navigationController?.show(vc, sender: self)
     }
     
+    func resetLogin() {
+        rememberButton.isSelected = false
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        email = ""
+        password = ""
+    }
     
     // MARK: - Actions
     
@@ -90,20 +98,24 @@ class LoginViewController: UIViewController {
     // MARK: - Keyboard setup
     
     @objc func keyboardWillShow(notification:NSNotification){
-
         let userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-
         var contentInset:UIEdgeInsets = self.scrollView.contentInset
         contentInset.bottom = keyboardFrame.size.height + 20
         scrollView.contentInset = contentInset
     }
 
     @objc func keyboardWillHide(notification:NSNotification){
-
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
+    }
+    
+    func subscribeToKeyboardEvents() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
+                                               name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
+                                               name:UIResponder.keyboardWillHideNotification, object: nil)
     }
     
 }
@@ -113,7 +125,4 @@ extension LoginViewController: UITextFieldDelegate {
         self.view.endEditing(true)
         return false
     }
-    
 }
-
-

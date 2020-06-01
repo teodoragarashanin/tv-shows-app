@@ -175,6 +175,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="SD8-ed-Gzc" id="ph5-oL-dU1"/>
                         <outlet property="passwordTextField" destination="ne7-15-5b1" id="xYu-T3-7kj"/>
+                        <outlet property="rememberButton" destination="Mxv-cv-wXP" id="5c7-6d-tJZ"/>
                         <outlet property="scrollView" destination="XrW-b7-5xM" id="CvW-UA-KWc"/>
                     </connections>
                 </viewController>
@@ -240,11 +241,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-kx-9AN">
+                                <rect key="frame" x="350" y="58" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="NvJ-Id-qei"/>
+                                    <constraint firstAttribute="height" constant="44" id="Ohm-sB-ofn"/>
+                                </constraints>
+                                <state key="normal" image="ic-logout"/>
+                                <connections>
+                                    <action selector="logoutAction:" destination="Vka-vf-piM" eventType="touchUpInside" id="bVb-Qd-b8e"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="G6A-ks-QLj" firstAttribute="top" secondItem="lz7-cX-qAo" secondAttribute="top" constant="20" id="0tU-5K-2Lq"/>
+                            <constraint firstItem="kw8-kx-9AN" firstAttribute="centerY" secondItem="G6A-ks-QLj" secondAttribute="centerY" id="3DV-UT-ZWd"/>
                             <constraint firstItem="G6A-ks-QLj" firstAttribute="leading" secondItem="lz7-cX-qAo" secondAttribute="leading" constant="20" id="9iA-fA-oqI"/>
+                            <constraint firstItem="lz7-cX-qAo" firstAttribute="trailing" secondItem="kw8-kx-9AN" secondAttribute="trailing" constant="20" id="Grn-oZ-J1R"/>
                             <constraint firstItem="lz7-cX-qAo" firstAttribute="bottom" secondItem="DsK-Cw-uP1" secondAttribute="bottom" id="Leb-oI-vQS"/>
                             <constraint firstItem="DsK-Cw-uP1" firstAttribute="top" secondItem="G6A-ks-QLj" secondAttribute="bottom" constant="10" id="nVQ-kI-Nvl"/>
                             <constraint firstItem="DsK-Cw-uP1" firstAttribute="leading" secondItem="lz7-cX-qAo" secondAttribute="leading" id="nlV-eM-SVN"/>
@@ -281,6 +295,7 @@
     <resources>
         <image name="ic-checkbox-empty" width="24" height="24"/>
         <image name="ic-checkbox-filled" width="24" height="24"/>
+        <image name="ic-logout" width="40" height="40"/>
         <image name="img-login-logo" width="75" height="80"/>
         <image name="img-placeholder-user2" width="48" height="48"/>
     </resources>

@@ -35,6 +35,12 @@ class ShowsListViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func logoutAction(_ sender: UIButton) {
+        UserDefaults.standard.set(false, forKey: Constants.REMEMBERED)
+        navigationController?.popViewController(animated: true)
+    }
+    
 }
 
 
