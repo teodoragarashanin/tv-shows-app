@@ -46,15 +46,20 @@ class LoginViewController: UIViewController {
     func loginUser(email: String, password: String) {
         adapter.loginUser(email: email, password: password) { [weak self] (result) in
             switch result {
-            case .success(let data):
-                let model = try? JSONDecoder().decode(LoginModel.self, from: data)
-                print(model)
-            case .failure(let error):
+            case .success(let token):
+                print(token)
+                self?.showVC()
+            case .failure( _):
                 self?.showAlert(title: "Login failed.", message: "Please try again with another credentials")
             }
         }
     }
     
+    func showVC() {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "ShowsVC")
+        navigationController?.show(vc, sender: self)
+    }
     
     // MARK: - Actions
     
@@ -72,23 +77,18 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func rememberMeAction(_ sender: UIButton) {
-        
+        sender.isSelected = !sender.isSelected
+        UserDefaults.standard.set(sender.isSelected, forKey: Constants.REMEMBERED)        
     }
     
     @IBAction func loginAction(_ sender: UIButton) {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "ShowsVC")
-        navigationController?.show(vc, sender: self)
-//        if email.isEmailValid() {
-//            if password.isEmpty {
-//                    showAlert(title: "Error", message: "Please enter password.")
-//            } else {
-//                 loginUser(email: email, password: password)
-//            }
-//        } else {
-//            showAlert(title: "Error", message: "Invalid email address. Please try with another one.")
-//        }
-     
+        if email.isEmpty || password.isEmpty {
+            showAlert(title: "Error", message: "Please enter your email and password.")
+        } else if !email.isEmailValid() {
+             showAlert(title: "Error", message: "Invalid email address. Please try with another one.")
+        } else {
+             loginUser(email: email, password: password)
+        }
     }
     
 }

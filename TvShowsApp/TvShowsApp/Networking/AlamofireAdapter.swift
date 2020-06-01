@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 
-class ApiRequest {
+class AlamofireRequest {
     var url: String
     var method: HTTPMethod
     var params: [String: Any]?
@@ -22,24 +22,42 @@ class ApiRequest {
     }
 }
 
+
 class AlamofireAdapter {
     
-    func fetch(with request: ApiRequest, completion: @escaping (Result<Data, AFError>) -> Void){
+    func fetch<T: Decodable>(with request: AlamofireRequest, dataType: T.Type, completion: @escaping (Result<T, AFError>) -> Void){
         AF.request(request.url, method: request.method, parameters: request.params, encoding: JSONEncoding.default)
             .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
-            .responseData { response in completion(response.result) }
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let model = self.parseData(type: dataType, data: data)
+                    completion(Result.success(model!))
+                case .failure(let error): ()
+                    
+                }
+        }
     }
     
-    func loginUser(email: String, password: String, completion: @escaping (Result<Data, AFError>) -> Void) {
+    func parseData<T: Decodable>(type: T.Type, data: Data) -> T? {
+        do {
+            let genericModel = try JSONDecoder().decode(type, from: data)
+            return genericModel
+        } catch {
+            return nil
+        }
+    }
+    
+    func loginUser(email: String, password: String, completion: @escaping (Result<LoginModel, AFError>) -> Void) {
         let data = LoginData(email: email, password: password).toDictionary()
-        let request = ApiRequest(url: Constants.LOGIN_URL, method: .post, params: data)
-        fetch(with: request, completion: completion)
+        let request = AlamofireRequest(url: Constants.LOGIN_URL, method: .post, params: data)
+        fetch(with: request, dataType: LoginModel.self, completion: completion)
     }
     
-    func fetchShows(completion: @escaping (Result<Data, AFError>) -> Void) {
-        let request = ApiRequest.init(url: Constants.SHOWS_URL, method: .get)
-        fetch(with: request, completion: completion)
+    func fetchShows(completion: @escaping (Result<ShowModel, AFError>) -> Void) {
+        let request = AlamofireRequest.init(url: Constants.SHOWS_URL, method: .get)
+        fetch(with: request, dataType: ShowModel.self, completion: completion)
     }
     
 }

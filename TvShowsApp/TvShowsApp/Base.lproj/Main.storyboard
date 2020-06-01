@@ -69,8 +69,8 @@
                                             <constraint firstAttribute="width" constant="25" id="Gs9-Od-9ky"/>
                                             <constraint firstAttribute="height" constant="25" id="QZg-Pt-wcE"/>
                                         </constraints>
-                                        <state key="normal" image="ic-checkbox-empty"/>
-                                        <state key="selected" image="ic-checkbox-filled"/>
+                                        <state key="normal" backgroundImage="ic-checkbox-empty"/>
+                                        <state key="selected" backgroundImage="ic-checkbox-filled"/>
                                         <connections>
                                             <action selector="rememberMeAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hZk-MS-H32"/>
                                         </connections>

@@ -12,7 +12,7 @@ struct Constants {
     static let LOGIN_URL = "https://api.infinum.academy/api/users/sessions"
     static let SHOWS_URL = "https://api.infinum.academy/api/shows"
     static let BASE_URL = "https://api.infinum.academy"
-
+    static let REMEMBERED = "REMEMBERED"
 }
 
 

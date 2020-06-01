@@ -11,6 +11,7 @@ import UIKit
 class ShowsListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    let CELL_HEIGHT = 160
     
     var shows = [Show]()
     
@@ -26,16 +27,9 @@ class ShowsListViewController: UIViewController {
         AlamofireAdapter().fetchShows { [weak self] (result) in
             switch result {
             case .success(let data):
-                do {
-                    let model = try? JSONDecoder().decode(ShowModel.self, from: data)
-                    self?.shows = model?.data as! [Show]
-                    self?.tableView.reloadData()
-                    
-                } catch(let error) {
-                    print(error)
-                }
-                
-            case .failure(let error): ()
+                self?.shows = data.data
+                self?.tableView.reloadData()
+            case .failure(let error): print(error)
             }
         }
     }
@@ -44,7 +38,7 @@ class ShowsListViewController: UIViewController {
 
 extension ShowsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 160
+        return CGFloat(CELL_HEIGHT)
     }
 }
 
